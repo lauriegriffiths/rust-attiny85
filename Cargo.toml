@@ -1,0 +1,32 @@
+[package]
+name = "hal"
+version = "0.1.0"
+authors = ["Laurie Griffiths <laurie@steampunk.digital>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "hal"
+test = false
+bench = false
+
+[dependencies]
+panic-halt = "0.2.0"
+
+[dependencies.attiny-hal]
+git = "https://github.com/Rahix/avr-hal/"
+features = ["attiny85","rt" ]
+
+
+# Configure the build for minimal size - AVRs have very little program memory
+[profile.dev]
+panic = "abort"
+debug = false
+lto = true
+opt-level = "s"
+
+[profile.release]
+panic = "abort"
+debug = false
+lto = true
+opt-level = "s"
